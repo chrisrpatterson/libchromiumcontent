@@ -1,0 +1,27 @@
+diff --git a/gin/array_buffer.cc b/gin/array_buffer.cc
+index f84934bfd712..63bce16a9d06 100644
+--- a/gin/array_buffer.cc
++++ b/gin/array_buffer.cc
+@@ -43,6 +43,10 @@ void* ArrayBufferAllocator::AllocateUninitialized(size_t length) {
+   return malloc(length);
+ }
+
++void* Realloc(void* data, size_t length) override {
++  return realloc(data, length);
++}
++
+ void ArrayBufferAllocator::Free(void* data, size_t length) {
+   free(data);
+ }
+diff --git a/gin/array_buffer.h b/gin/array_buffer.h
+index 2aef366ac819..c037808a9bb3 100644
+--- a/gin/array_buffer.h
++++ b/gin/array_buffer.h
+@@ -21,6 +21,7 @@ class ArrayBufferAllocator : public v8::ArrayBuffer::Allocator {
+  public:
+   void* Allocate(size_t length) override;
+   void* AllocateUninitialized(size_t length) override;
++  void* Realloc(void* data, size_t length) override;
+   void Free(void* data, size_t length) override;
+
+   GIN_EXPORT static ArrayBufferAllocator* SharedInstance();
