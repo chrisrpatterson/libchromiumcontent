@@ -1,8 +1,8 @@
 diff --git a/include/v8.h b/include/v8.h
-index 573e80176d..0d3e98d079 100644
+index 277cbd442a..a99fdf9fbe 100644
 --- a/include/v8.h
 +++ b/include/v8.h
-@@ -4318,6 +4334,13 @@ class V8_EXPORT ArrayBuffer : public Object {
+@@ -4266,6 +4266,13 @@ class V8_EXPORT ArrayBuffer : public Object {
       */
      virtual void* AllocateUninitialized(size_t length) = 0;
 
@@ -14,8 +14,8 @@ index 573e80176d..0d3e98d079 100644
 +    virtual void* Realloc(void* data, size_t length) = 0;
 +
      /**
-      * Free the memory block of size |length|, pointed to by |data|.
-      * That memory is guaranteed to be previously allocated by |Allocate|.
+      * Reserved |length| bytes, but do not commit the memory. Must call
+      * |SetProtection| to make memory accessible.
 diff --git a/src/api.cc b/src/api.cc
 index 8b177d041d..180ce3c9de 100644
 --- a/src/api.cc
