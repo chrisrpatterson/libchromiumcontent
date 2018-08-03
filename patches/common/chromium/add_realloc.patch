@@ -6,7 +6,7 @@ index f84934bfd712..63bce16a9d06 100644
    return malloc(length);
  }
 
-+void* ArrayBufferAllocator::Realloc(void* data, size_t length) override {
++void* ArrayBufferAllocator::Realloc(void* data, size_t length) {
 +  return realloc(data, length);
 +}
 +
