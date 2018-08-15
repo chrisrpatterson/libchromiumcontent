@@ -402,7 +402,7 @@ patches:
   file: allow_webview_file_url.patch
   description: |
     Allow webview to load non-web URLs.
-_ 
+-
   owners: codebytere
   file: enable_osr_components.patch
   description: |
