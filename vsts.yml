@@ -54,18 +54,18 @@ phases:
      fi
     name: Update
 
-  - task: AmazonWebServices.aws-vsts-tools.S3Upload.S3Upload@1
-    inputs:
-      awsCredentials: 'Libchromium Content S3'
-      regionName: 'us-east-1'
-      bucketName: 'github-janky-artifacts'
-      sourceFolder: s3files
-      globExpressions: 'src.tar.*'
-      targetFolder: 'libchromiumcontent/$(TARGET_TYPE)/src/$(ChromiumVersion)'
-      filesAcl: 'public-read'
-      logRequest: true
-      logResponse: true
-    condition: and(succeeded(), eq(variables['UploadPackagedSrc'], 'True'))
+ # - task: AmazonWebServices.aws-vsts-tools.S3Upload.S3Upload@1
+ #   inputs:
+ #     awsCredentials: 'Libchromium Content S3'
+ #     regionName: 'us-east-1'
+ #     bucketName: 'github-janky-artifacts'
+ #     sourceFolder: s3files
+ #     globExpressions: 'src.tar.*'
+ #     targetFolder: 'libchromiumcontent/$(TARGET_TYPE)/src/$(ChromiumVersion)'
+ #     filesAcl: 'public-read'
+ #     logRequest: true
+ #     logResponse: true
+ #   condition: and(succeeded(), eq(variables['UploadPackagedSrc'], 'True'))
 
   - bash: |
      set -e
@@ -109,20 +109,20 @@ phases:
       testRunTitle: 'Libchromiumcontent Tests'
     condition: and(always(), eq(variables['Build.Reason'], 'Schedule'), eq(variables['COMPONENT'], 'static_library'))
 
-  - task: AmazonWebServices.aws-vsts-tools.S3Upload.S3Upload@1
-    inputs:
-      awsCredentials: 'Libchromium Content S3'
-      regionName: 'us-east-1'
-      bucketName: 'github-janky-artifacts'
-      sourceFolder: s3files
-      globExpressions: 'libchromiumcontent*'
-      targetFolder: 'libchromiumcontent/$(TARGET_TYPE)/$(TARGET_ARCH)/$(gitcommit)'
-      filesAcl: 'public-read'
-      logRequest: true
-      logResponse: true
+ # - task: AmazonWebServices.aws-vsts-tools.S3Upload.S3Upload@1
+ #   inputs:
+ #     awsCredentials: 'Libchromium Content S3'
+ #     regionName: 'us-east-1'
+ #     bucketName: 'github-janky-artifacts'
+ #     sourceFolder: s3files
+ #     globExpressions: 'libchromiumcontent*'
+ #     targetFolder: 'libchromiumcontent/$(TARGET_TYPE)/$(TARGET_ARCH)/$(gitcommit)'
+ #     filesAcl: 'public-read'
+ #     logRequest: true
+ #     logResponse: true
 
-  - task: mspremier.PostBuildCleanup.PostBuildCleanup-task.PostBuildCleanup@3
-    condition: always()
+ # - task: mspremier.PostBuildCleanup.PostBuildCleanup-task.PostBuildCleanup@3
+ #   condition: always()
     
 - phase: Skip_libchromiumcontent_PR_build
   condition: and(eq(variables['System.PullRequest.IsFork'], 'False'), eq(variables['Build.Reason'], 'PullRequest'))
