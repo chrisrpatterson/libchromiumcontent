@@ -124,11 +124,11 @@ phases:
  # - task: mspremier.PostBuildCleanup.PostBuildCleanup-task.PostBuildCleanup@3
  #   condition: always()
     
-- phase: Skip_libchromiumcontent_PR_build
-  condition: and(eq(variables['System.PullRequest.IsFork'], 'False'), eq(variables['Build.Reason'], 'PullRequest'))
-  steps:
-  - bash: |
-      echo "Skipping PR build for PR requested from branch."
+# - phase: Skip_libchromiumcontent_PR_build
+#  condition: and(eq(variables['System.PullRequest.IsFork'], 'False'), eq(variables['Build.Reason'], 'PullRequest'))
+#  steps:
+#  - bash: |
+#      echo "Skipping PR build for PR requested from branch."
 
-  - task: mspremier.PostBuildCleanup.PostBuildCleanup-task.PostBuildCleanup@3
-    condition: always()
+#  - task: mspremier.PostBuildCleanup.PostBuildCleanup-task.PostBuildCleanup@3
+#    condition: always()
