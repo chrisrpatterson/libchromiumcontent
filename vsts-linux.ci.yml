@@ -1,0 +1,41 @@
+resources:
+  containers:
+  - container: build-container
+    image: eiumcontenlectronbuilds/libchromt:0.0.4
+ 
+variables:
+  TARGET_ARCH: x64
+  COMPONENT: static_library
+  
+queue:
+  container: build-container
+  name: 'Hosted Ubuntu 1604'
+  
+steps:
+
+- script: script/bootstrap
+  displayName: Bootstrap
+  
+- script: script/update --clean -t $TARGET_ARCH --use_packaged_src
+  displayName: Update
+
+- script: script/build -t $TARGET_ARCH -c $COMPONENT
+  displayName: Build static library
+
+- script: script/build -t $TARGET_ARCH -c ffmpeg
+  displayName:Build FFmpeg
+
+- script: script/create-dist -t $TARGET_ARCH -c $COMPONENT
+  displayName: Create distrubution
+
+- script: |
+     if [[ -z "${LIBCHROMIUMCONTENT_S3_ACCESS_KEY}" ]]; then
+       echo "Skipping upload to S3"
+     else
+       script/upload -t $TARGET_ARCH
+     fi
+   displayName: Upload to S3
+   
+#- task: publishBuildArtifacts@1
+#  inputs:
+#    pathToPublish: libchromiumcontent-static.tar.bz2
