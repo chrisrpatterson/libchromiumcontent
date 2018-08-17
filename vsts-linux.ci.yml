@@ -1,7 +1,7 @@
 resources:
   containers:
   - container: build-container
-    image: eiumcontenlectronbuilds/libchromt:0.0.4
+    image: electronbuilds/libchromiumcontent:0.0.4
  
 variables:
   TARGET_ARCH: x64
