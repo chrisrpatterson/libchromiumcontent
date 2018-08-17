@@ -2,6 +2,7 @@ resources:
   containers:
   - container: build-container
     image: electronbuilds/libchromiumcontent:0.0.4
+    options: -u=0
  
 variables:
   TARGET_ARCH: x64
