@@ -11,7 +11,7 @@ variables:
 queue:
   container: build-container
   name: 'Hosted Ubuntu 1604'
-  timeoutInMinutes: 240
+  timeoutInMinutes: 360
   
 steps:
 
