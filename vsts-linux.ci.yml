@@ -28,13 +28,13 @@ steps:
 - script: script/create-dist -t $TARGET_ARCH -c $COMPONENT
   displayName: Create distrubution
 
-- script: |
-     if [[ -z "${LIBCHROMIUMCONTENT_S3_ACCESS_KEY}" ]]; then
-       echo "Skipping upload to S3"
-     else
-       script/upload -t $TARGET_ARCH
-     fi
-   displayName: Upload to S3
+#- script: |
+#     if [[ -z "${LIBCHROMIUMCONTENT_S3_ACCESS_KEY}" ]]; then
+#       echo "Skipping upload to S3"
+#     else
+#       script/upload -t $TARGET_ARCH
+#     fi
+#  displayName: Upload to S3
    
 #- task: publishBuildArtifacts@1
 #  inputs:
